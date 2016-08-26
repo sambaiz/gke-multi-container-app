@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: service
+  labels:
+    app: service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: service
+    spec:
+      containers:
+      - name: service
+        image: gcr.io/gcp-test-141011/multitest:v4
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        env:
+        - name: TYPE
+          value: SERVICE
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: myregistrykey 
